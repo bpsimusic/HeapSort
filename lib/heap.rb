@@ -11,7 +11,7 @@ class BinaryMinHeap
     @store.length
   end
 
-  # Extract the smallest element
+  # Extract the smallest element, O(log n) time.
   def extract
     @store[-1], @store[0] = @store[0], @store[-1]
     val = @store.pop
@@ -23,6 +23,7 @@ class BinaryMinHeap
     @store[0]
   end
 
+  #Add an element, O(log n) time.
   def push(val)
     @store.push(val)
     self.class.heapify_up(@store, (@store.length-1), &prc)
@@ -49,6 +50,7 @@ class BinaryMinHeap
     children
   end
 
+  #returns the parent index
   def self.parent_index(child_index)
     parent = nil
     if child_index == 0
@@ -61,7 +63,7 @@ class BinaryMinHeap
     parent
   end
 
-
+  # O (log n)
   # if array[parent_idx] is bigger than children, swap places.
   def self.heapify_down(array, parent_idx, len = array.length, &prc)
     prc ||= Proc.new {|a,b| a<=>b}
@@ -84,7 +86,7 @@ class BinaryMinHeap
     array
   end
 
-
+  # O (log n)
   #this is when you push a new element into an array. You need to heapify_up
   #if element is smaller than parent.
   def self.heapify_up(array, child_idx, len = array.length, &prc)
